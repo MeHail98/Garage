@@ -4,7 +4,7 @@ import model.entity.garage.abstractEntity.Garage;
 import model.entity.garage.abstractEntity.GarageInterface;
 import model.entity.vehicles.abstractEntity.Vehicle;
 
-public class DynamicGarage extends Garage implements GarageInterface {
+public class DynamicGarage extends Garage implements GarageInterface{
     private Vehicle[] vehicles;
 
     public DynamicGarage(Vehicle[] array) {
@@ -49,6 +49,11 @@ public class DynamicGarage extends Garage implements GarageInterface {
     public void setVehicle(int index, Vehicle vehicle){
         if(index>=0 && index<vehicles.length)
         this.vehicles[index] = vehicle;
+    }
+
+    @Override
+    public int getSize() {
+        return vehicles.length;
     }
 
     @Override
