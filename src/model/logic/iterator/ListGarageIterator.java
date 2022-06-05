@@ -4,8 +4,13 @@ import model.entity.garage.ListGarage;
 import model.entity.vehicles.abstractEntity.Vehicle;
 
 public class ListGarageIterator implements Iterable {
-    private ListGarage listGarage;
-    int current = 0;
+    private final ListGarage listGarage;
+    int current;
+
+    public ListGarageIterator(ListGarage listGarage){
+        this.listGarage = listGarage;
+        current = 0;
+    }
 
     @Override
     public boolean hasNext() {

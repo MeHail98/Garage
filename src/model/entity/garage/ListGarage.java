@@ -2,6 +2,9 @@ package model.entity.garage;
 
 import model.entity.garage.abstractEntity.Garage;
 import model.entity.vehicles.abstractEntity.Vehicle;
+import model.logic.iterator.FixedGarageIterator;
+import model.logic.iterator.Iterable;
+import model.logic.iterator.ListGarageIterator;
 
 public class ListGarage extends Garage {
     private Node first;
@@ -102,6 +105,10 @@ public class ListGarage extends Garage {
             temp = temp.next;
         }
         return builder.toString();
+    }
+
+    public Iterable getIterator(){
+        return new ListGarageIterator(this);
     }
 
 }

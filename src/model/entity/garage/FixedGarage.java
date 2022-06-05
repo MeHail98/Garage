@@ -2,6 +2,8 @@ package model.entity.garage;
 
 import model.entity.garage.abstractEntity.Garage;
 import model.entity.vehicles.abstractEntity.Vehicle;
+import model.logic.iterator.FixedGarageIterator;
+import model.logic.iterator.Iterable;
 
 public class FixedGarage extends Garage {
     public final int DEFAULT_CAPACITY = 10;
@@ -74,5 +76,9 @@ public class FixedGarage extends Garage {
     public void setVehicle(int index, Vehicle vehicle){
         if(index>=0 && index<vehicles.length)
             this.vehicles[index] = vehicle;
+    }
+
+    public Iterable getIterator(){
+        return new FixedGarageIterator(this);
     }
 }

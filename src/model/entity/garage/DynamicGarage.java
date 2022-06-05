@@ -2,6 +2,9 @@ package model.entity.garage;
 
 import model.entity.garage.abstractEntity.Garage;
 import model.entity.vehicles.abstractEntity.Vehicle;
+import model.logic.iterator.DynamicGarageIterator;
+import model.logic.iterator.FixedGarageIterator;
+import model.logic.iterator.Iterable;
 
 public class DynamicGarage extends Garage {
     private Vehicle[] vehicles;
@@ -64,5 +67,9 @@ public class DynamicGarage extends Garage {
             builder.append(vh).append("\n");
         }
         return builder.toString();
+    }
+
+    public Iterable getIterator(){
+        return new DynamicGarageIterator(this);
     }
 }

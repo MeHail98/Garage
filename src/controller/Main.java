@@ -1,21 +1,13 @@
 package controller;
 
-import model.entity.fabique.autoConstructor.AutoConstructor;
-import model.entity.fabique.autoConstructor.BigWheel;
-import model.entity.fabique.autoConstructor.SmallWheel;
-import model.entity.fabique.autoConstructor.Wheel;
 import model.entity.garage.DynamicGarage;
 import model.entity.garage.ListGarage;
 import model.entity.vehicles.Airplane;
 import model.entity.vehicles.Automobile;
 import model.entity.vehicles.Bicycle;
 import model.entity.vehicles.abstractEntity.Vehicle;
-import model.logic.sorter.comparator.SortByMaxSpeedAsc;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import model.logic.iterator.Iterable;
+import model.logic.iterator.OneIteratorForEverything;
 
 public class Main {
     public static void main (String[] a){
@@ -23,26 +15,29 @@ public class Main {
         Vehicle airplane = new Airplane("bicycle",10,1000,false,true);
         Vehicle automobile = new Automobile("auto",100,100,true,true);
 
-        Wheel smallWheel = new SmallWheel();
-        Wheel bigWheel = new BigWheel();
+//        Wheel smallWheel = new SmallWheel();
+//        Wheel bigWheel = new BigWheel();
+//
+//
+//        System.out.println(automobile);
+//        AutoConstructor autoConstructor = AutoConstructor.getInstance();
+//        System.out.println(autoConstructor);
+//        autoConstructor.addVehicleToConstructor(automobile);
+//        System.out.println(autoConstructor);
+//        autoConstructor.addWheelsOnVehicle(smallWheel);
+//        System.out.println(autoConstructor);
+//        autoConstructor.addWheelsOnVehicle(bigWheel);
+//        System.out.println(autoConstructor);
 
+        Vehicle[] array = {bicycle,airplane,automobile};
+        DynamicGarage dg = new DynamicGarage(array);
+        ListGarage lg = new ListGarage();
+        lg.addMajor(bicycle,airplane,automobile);
 
-        System.out.println(automobile);
-        AutoConstructor autoConstructor = AutoConstructor.getInstance();
-        System.out.println(autoConstructor);
-        autoConstructor.addVehicleToConstructor(automobile);
-        System.out.println(autoConstructor);
-        autoConstructor.addWheelsOnVehicle(smallWheel);
-        System.out.println(autoConstructor);
-        autoConstructor.addWheelsOnVehicle(bigWheel);
-        System.out.println(autoConstructor);
-
-
-
-//        Vehicle[] array = {bicycle,airplane,automobile};
-//        DynamicGarage dg = new DynamicGarage(array);
-//        ListGarage lg = new ListGarage();
-//        lg.addMajor(bicycle,airplane,automobile);
+//        Iterable iterator = dg.getIterator();
+//            while(iterator.hasNext()){
+//                System.out.println(iterator.next());
+//        }
 //
 //        List<Vehicle> vhList = new ArrayList<>();
 //        vhList.add(bicycle);
