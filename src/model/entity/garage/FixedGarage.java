@@ -10,55 +10,69 @@ public class FixedGarage extends Garage {
     public FixedGarage(Vehicle[] array) {
         moveNulls(array);
         this.vehicles = array;
-        super.setCapacity(array.length);
+        capacity = array.length;
         super.checkNumberOfVehicles(array);
     }
     public FixedGarage(){
         vehicles = new Vehicle[DEFAULT_CAPACITY];
-        setCapacity(DEFAULT_CAPACITY);
-        setNumberOfVehicles(0);
+        capacity = DEFAULT_CAPACITY;
+        numberOfVehicles = 0;
     }
     public FixedGarage(int capacity){
         vehicles = new Vehicle[capacity];
-        super.setCapacity(capacity);
-        setNumberOfVehicles(0);
+        super.capacity = capacity;
+        numberOfVehicles = 0;
     }
 
     public void setVehiclesInGarage(Vehicle[] array) {
         moveNulls(array);
         this.vehicles = array;
-        setCapacity(array.length);
+        capacity = array.length;
         checkNumberOfVehicles(array);
     }
 
     public void add(Vehicle vehicle){
         if(vehicle == null) return;
-        if(super.getNumberOfVehicles()<super.getCapacity()){
-            vehicles[getNumberOfVehicles()] = vehicle;
-            setNumberOfVehicles(getNumberOfVehicles()+1);
+        if(numberOfVehicles<capacity){
+            vehicles[numberOfVehicles] = vehicle;
+            numberOfVehicles++;
         }
     }
 
-//    public void remove(<T> obj){
-//        [1,0,3,0,5,0,0,0]
-//    }
+    public void remove (Vehicle vehicle){
+        for (int i = 0; i < capacity; i++) {
+            if (vehicles[i] ==vehicle) remove(i);
+        }
+    }
 
     public void remove(int index){
-        if(index == getCapacity()-1) vehicles[index] = null;
-        if(index>=0 && index<getCapacity()) {
+        if(index == capacity-1) vehicles[index] = null;
+        if(index>=0 && index<capacity) {
             System.arraycopy(vehicles, index + 1, vehicles, index, getCapacity() - index - 1);
-            setNumberOfVehicles(getNumberOfVehicles()-1);
+            vehicles[numberOfVehicles-1] = null;
+            numberOfVehicles--;
         }
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        if (getNumberOfVehicles()== 0) return "Empty garage";
+        if (numberOfVehicles== 0) return "Empty garage";
         for (Vehicle vh:vehicles) {
             if(vh == null) builder.append("Nothing here yet").append("\n");
             else builder.append(vh).append("\n");
         }
         return builder.toString();
+    }
+
+    @Override
+    public Vehicle getVehicle(int index) {
+        if(index<0 || index>vehicles.length) return null;
+        return vehicles[index];
+    }
+
+    public void setVehicle(int index, Vehicle vehicle){
+        if(index>=0 && index<vehicles.length)
+            this.vehicles[index] = vehicle;
     }
 }

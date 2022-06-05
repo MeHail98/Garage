@@ -1,6 +1,6 @@
 package model.entity.vehicles.abstractEntity;
 
-public class Vehicle {
+public abstract class Vehicle {
     private String model;
     private int weight;
     private int maxSpeed;

@@ -8,12 +8,12 @@ public class ListGarage extends Garage {
 
     public ListGarage() {
         first = null;
-        setCapacity(0);
-        setNumberOfVehicles(0);
+        capacity =0;
+        numberOfVehicles = 0;
     }
 
     public Vehicle getVehicle(int index) {
-        if(index>getNumberOfVehicles() && index<=0){
+        if(index>=numberOfVehicles || index<0){
             return null;
         }
         Node temp = first;
@@ -23,8 +23,8 @@ public class ListGarage extends Garage {
         return temp.vehicle;
     }
 
-    public void addVehicle(Vehicle vehicle) {
-        if (getCapacity() == 0) {
+    public void addMinor(Vehicle vehicle) {
+        if (capacity == 0) {
             first = new Node(vehicle);
         } else {
             Node temp = first;
@@ -33,10 +33,52 @@ public class ListGarage extends Garage {
             }
             temp.next = new Node(vehicle);
         }
-
+        capacity++;
+        numberOfVehicles++;
     }
 
-    private class Node {
+    public void addMajor(Vehicle ...vehicles){
+        if(capacity == 0){
+            first = new Node(vehicles[0]);
+            Node temp = first;
+            for (int i = 1; i < vehicles.length; i++) {
+                temp.next = new Node(vehicles[i]);
+                temp = temp.next;
+            }
+        } else{
+            Node temp = first;
+            while(temp.next != null){
+                temp = temp.next;
+            }
+            for (Vehicle vehicle : vehicles) {
+                temp.next = new Node(vehicle);
+                temp = temp.next;
+            }
+        }
+        capacity += vehicles.length;
+        numberOfVehicles +=vehicles.length;
+    }
+
+    public void removeVehicle(int index){
+        if(index>numberOfVehicles || index<0) return;
+        if(index == 0) {
+            first = first.next;
+            numberOfVehicles--;
+            return;
+        }
+        Node temp = first;
+        int current = 1;
+        while (temp.next!=null){
+            if(current++ == index){
+                temp.next = temp.next.next;
+                numberOfVehicles--;
+                return;
+            }
+            temp = temp.next;
+        }
+    }
+
+    private static class Node {
         public Vehicle vehicle;
         public Node next;
 
@@ -46,4 +88,20 @@ public class ListGarage extends Garage {
         public Node() {
         }
     }
+
+    public void setVehicle(int index, Vehicle vehicle){
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        if(first == null) return "Empty garage";
+        Node temp = first;
+        for (int i = 0; i < numberOfVehicles; i++) {
+            builder.append(temp.vehicle).append("\n");
+            temp = temp.next;
+        }
+        return builder.toString();
+    }
+
 }
