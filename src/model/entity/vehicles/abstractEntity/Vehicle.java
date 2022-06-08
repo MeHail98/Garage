@@ -1,10 +1,16 @@
 package model.entity.vehicles.abstractEntity;
 
+import model.entity.Item;
+
+import java.util.List;
+
 public abstract class Vehicle {
     private String model;
     private int weight;
     private int maxSpeed;
     private boolean hasEngine;
+
+    public List<Item> list ;
 
     public Vehicle(){
     }

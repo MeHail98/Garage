@@ -1,4 +1,4 @@
-package model.entity.fabique.autoConstructor;
+package model.entity.fabique.Wheels;
 
 public class SmallWheel extends Wheel{
     private final int WHEEL_WEIGHT = 10;

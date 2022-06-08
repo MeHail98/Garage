@@ -1,5 +1,7 @@
 package model.entity.fabique.autoConstructor;
 
+import model.entity.Item;
+import model.entity.fabique.Wheels.Wheel;
 import model.entity.vehicles.abstractEntity.Vehicle;
 
 public class AutoConstructor {
@@ -17,11 +19,21 @@ public class AutoConstructor {
         wheel = null;
     }
 
+
+
     public void addVehicleToConstructor (Vehicle vehicle){
         this.vehicle = vehicle;
     }
 
     public void addWheelsOnVehicle (Wheel newWheel){
+
+        for (int i = 0; i < vehicle.list.size(); i++) {
+            Item item = vehicle.list.get(i);
+            if(item instanceof Wheel){
+                vehicle.list.remove(i);
+            }
+        }
+
         if (this.wheel == null){
             this.wheel = newWheel;
             vehicle.setWeight(vehicle.getWeight()+ newWheel.getWeight());
